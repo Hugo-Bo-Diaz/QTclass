@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Transform</class>
+ <widget class="QWidget" name="Transform">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>380</width>
+    <height>209</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="1">
+    <widget class="QDoubleSpinBox" name="PosXSpinBox"/>
+   </item>
+   <item row="2" column="1">
+    <widget class="QDoubleSpinBox" name="RotXSpinBox"/>
+   </item>
+   <item row="0" column="2">
+    <widget class="QLabel" name="yLabel">
+     <property name="text">
+      <string>Y</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="QDoubleSpinBox" name="RotYSpinBox"/>
+   </item>
+   <item row="3" column="3">
+    <widget class="QDoubleSpinBox" name="SclZSpinBox"/>
+   </item>
+   <item row="3" column="2">
+    <widget class="QDoubleSpinBox" name="SclYSpinBox"/>
+   </item>
+   <item row="0" column="3">
+    <widget class="QLabel" name="zLabel">
+     <property name="text">
+      <string>Z</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="QDoubleSpinBox" name="PosYSpinBox"/>
+   </item>
+   <item row="1" column="3">
+    <widget class="QDoubleSpinBox" name="PosZSpinBox"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="rotationLabel">
+     <property name="text">
+      <string>Rotation</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="2">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="positionLabel">
+     <property name="text">
+      <string>Position</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="scaleLabel">
+     <property name="text">
+      <string>Scale</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QDoubleSpinBox" name="SclXSpinBox"/>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLabel" name="xLabel">
+     <property name="text">
+      <string>X</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="3">
+    <widget class="QDoubleSpinBox" name="RotZSpinBox"/>
+   </item>
+   <item row="3" column="4">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
