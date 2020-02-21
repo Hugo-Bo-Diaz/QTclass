@@ -7,10 +7,10 @@ Inspector::Inspector(QWidget *parent) :
     uiTransform(new Ui::Transform),
     uiMesh(new Ui::Mesh)
 {
-    QWidget *transformWidget = new QWidget;
+    transformWidget = new QWidget;
     uiTransform->setupUi(transformWidget);
 
-    QWidget *meshWidget = new QWidget;
+    meshWidget = new QWidget;
     uiMesh->setupUi(meshWidget);
 
     QVBoxLayout *layout = new QVBoxLayout();
@@ -25,4 +25,16 @@ Inspector::~Inspector()
 {
     delete uiTransform;
     delete uiMesh;
+}
+
+
+void Inspector::onEntitySelected(int entityId)
+{
+    if(entityId%2==0)
+    {
+        meshWidget->show();
+    }
+    else {
+        meshWidget->hide();
+    }
 }

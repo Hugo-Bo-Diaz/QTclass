@@ -16,10 +16,15 @@ public:
     explicit Inspector(QWidget *parent = nullptr);
     ~Inspector();
 
+public slots:
+    void onEntitySelected(int entity);
 
 private:
     Ui::Transform *uiTransform;
     Ui::Mesh *uiMesh;
+
+    QWidget *transformWidget;
+    QWidget *meshWidget;
 };
 
 #endif // HIERARCHY_H

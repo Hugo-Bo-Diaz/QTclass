@@ -8,7 +8,7 @@ class MainWindow;
 }
 class Hierarchy;
 class Inspector;
-
+class SceneView;
 
 class MainWindow : public QMainWindow
 {
@@ -26,8 +26,9 @@ public slots:
 private:
     Ui::MainWindow *uiMainWindow;
 
-    Inspector *uiInspector;
+    Inspector *inspector;
     Hierarchy *hierarchy;
+    SceneView *sceneview;
 };
 
 #endif // MAINWINDOW_H

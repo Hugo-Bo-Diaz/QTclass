@@ -28,12 +28,14 @@ SOURCES += \
         hierarchy.cpp \
         inspector.cpp \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        sceneview.cpp
 
 HEADERS += \
         hierarchy.h \
         inspector.h \
-        mainwindow.h
+        mainwindow.h \
+        sceneview.h
 
 FORMS += \
         hierarchy.ui \
