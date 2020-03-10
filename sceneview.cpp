@@ -4,6 +4,16 @@
 SceneView::SceneView(QWidget* parent): QWidget (parent)
 {
     setAutoFillBackground(true);
+
+    /*circle* newcircle = new circle();
+    newcircle->SetCircle(100,100,50,50);
+    newcircle->SetColorFill(QColor::fromRgb(255,0,0));
+    newcircle->SetColorBorder(QColor::fromRgb(0,255,0));
+    newcircle->SetBorderThickness(5);
+
+    newcircle->type = CIRCLE;
+    entities.push_back((shape*)newcircle);*/
+
 }
 
 QSize SceneView::sizeHint() const
@@ -30,7 +40,7 @@ void SceneView::paintEvent(QPaintEvent *event)
     QBrush brush;
     QPen pen;
 
-    brush.setColor(blueColor);
+    /*brush.setColor(blueColor);
     brush.setStyle(Qt::BrushStyle::SolidPattern);
     pen.setStyle(Qt::PenStyle::NoPen);
     painter.setBrush(brush);
@@ -48,5 +58,58 @@ void SceneView::paintEvent(QPaintEvent *event)
     int r=64;int w=r*2;int h =r*2; int x = rect().width()/2-r;int y = rect().height()/2-r;
     QRect circleRect(x,y,w,h);
     painter.drawEllipse(circleRect);
+    */
+
+    for (int i=0; i<entities.count(); ++i) {
+        brush.setColor(entities[i]->colorFill);
+        brush.setStyle(entities[i]->bstyle);
+        painter.setBrush(brush);
+        pen.setWidth(entities[i]->borderThickness);
+        pen.setColor(entities[i]->colorBorder);
+        pen.setStyle(entities[i]->pstyle);
+        painter.setPen(pen);
+
+        switch (entities[i]->type)
+        {
+        case CIRCLE:
+        {
+            circle* c = ((circle*)entities[i]);
+            qreal rx = c->rx;
+            qreal ry = c->ry;
+
+            painter.drawEllipse(*(c->Qcenter), rx, ry);
+        }
+            break;
+        case RECTANGLE:
+        {
+            rectangle* r = ((rectangle*)entities[i]);
+
+            painter.drawRect(*(r->Qrectangle));
+        }
+            break;
+        default:
+            break;
+
+        }
+
+    };
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

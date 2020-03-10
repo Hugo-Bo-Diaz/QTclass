@@ -1,22 +1,27 @@
+#include <QColorDialog>
 #include "inspector.h"
+#include "sceneview.h"
+#include "mainwindow.h"
 #include "ui_transform.h"
-#include "ui_mesh.h"
+#include "ui_properties.h"
 
 Inspector::Inspector(QWidget *parent) :
     QWidget(parent),
     uiTransform(new Ui::Transform),
-    uiMesh(new Ui::Mesh)
+    uiProperties(new Ui::Properties)
 {
     transformWidget = new QWidget;
     uiTransform->setupUi(transformWidget);
 
-    meshWidget = new QWidget;
-    uiMesh->setupUi(meshWidget);
+    propertiesWidget = new QWidget;
+    uiProperties->setupUi(propertiesWidget);
 
     QVBoxLayout *layout = new QVBoxLayout();
     layout->addWidget(transformWidget);
-    layout->addWidget(meshWidget);
-    layout->addItem(new QSpacerItem(1, 1, QSizePolicy::Expanding, QSizePolicy::Expanding));
+    QSpacerItem* spacer = new QSpacerItem(1, 1, QSizePolicy::Expanding, QSizePolicy::Expanding);
+    layout->addItem(spacer);
+    layout->addWidget(propertiesWidget);
+
     setLayout(layout);
 
 }
@@ -24,17 +29,12 @@ Inspector::Inspector(QWidget *parent) :
 Inspector::~Inspector()
 {
     delete uiTransform;
-    delete uiMesh;
+    delete uiProperties;
 }
 
 
 void Inspector::onEntitySelected(int entityId)
 {
-    if(entityId%2==0)
-    {
-        meshWidget->show();
-    }
-    else {
-        meshWidget->hide();
-    }
+
+    win->sceneview->entities[entityId]->SetColorBorder(QColor::fromRgb(255,255,255));
 }

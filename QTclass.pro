@@ -32,6 +32,7 @@ SOURCES += \
         sceneview.cpp
 
 HEADERS += \
+        Shapes.h \
         hierarchy.h \
         inspector.h \
         mainwindow.h \
@@ -40,7 +41,7 @@ HEADERS += \
 FORMS += \
         hierarchy.ui \
         mainwindow.ui \
-        mesh.ui \
+        properties.ui \
         transform.ui
 
 # Default rules for deployment.

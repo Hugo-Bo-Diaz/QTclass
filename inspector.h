@@ -5,7 +5,7 @@
 
 namespace Ui {
 class Transform;
-class Mesh;
+class Properties;
 }
 
 class Inspector : public QWidget
@@ -21,10 +21,10 @@ public slots:
 
 private:
     Ui::Transform *uiTransform;
-    Ui::Mesh *uiMesh;
+    Ui::Properties *uiProperties;
 
     QWidget *transformWidget;
-    QWidget *meshWidget;
+    QWidget *propertiesWidget;
 };
 
 #endif // HIERARCHY_H

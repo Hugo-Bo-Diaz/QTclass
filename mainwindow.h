@@ -18,6 +18,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    SceneView *sceneview;
+
 public slots:
 
     void onLoadFile();
@@ -28,7 +30,7 @@ private:
 
     Inspector *inspector;
     Hierarchy *hierarchy;
-    SceneView *sceneview;
 };
 
+extern MainWindow* win;
 #endif // MAINWINDOW_H
