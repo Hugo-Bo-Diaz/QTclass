@@ -17,7 +17,7 @@
 
 ![I don't know how else I can illustrate this](/readme_images/image3.PNG)
 
--Undo and Redo buttons!(experimental feature when undoing shape shifts)
+-Undo and Redo buttons!(experimental feature, may crash when undoing/redoing shape shifts)
 
 ## Qt features used for the assignment:
 -Signals/slots: used to comunicate the hierarchy, the scene and the inspector on the left
