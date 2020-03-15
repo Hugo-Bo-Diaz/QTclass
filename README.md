@@ -9,15 +9,15 @@ then we would've worked together. As of 21:00pm of the delivery date I have stil
 ## Features:
 -Draw figures: all of their attributes can be changed: size, position, color, patterns, border thickness...
 
-![You can get more creative than this, this is just an example!](/readme_images/image1.png)
+![You can get more creative than this, this is just an example!](/readme_images/image1.PNG)
 
 -All of these parameters are modifiable!
 
-![A lot of 'em](/readme_images/image2.png)
+![A lot of 'em](/readme_images/image2.PNG)
 
 -Save and load your creations!
 
-![I don't know how else I can illustrate this](/readme_images/image3.png)
+![I don't know how else I can illustrate this](/readme_images/image3.PNG)
 
 -Undo and Redo buttons!(experimental feature when undoing shape shifts)
 
