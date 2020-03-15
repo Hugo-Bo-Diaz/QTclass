@@ -3,5 +3,8 @@
         <file alias="save">PNG/Disquette.png</file>
         <file alias="open">PNG/Folder.png</file>
         <file alias="search">PNG/Zoom.png</file>
+        <file alias="undo">PNG/Arrow left.png</file>
+        <file alias="redo">PNG/Arrow right.png</file>
+        <file alias="exit">PNG/Power.png</file>
     </qresource>
 </RCC>

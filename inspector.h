@@ -22,6 +22,7 @@ public:
 
 signals:
     void AttributeChanged(AttribType aty,float att);
+    void ActionDone();
     void SceneChange();
 
 public slots:

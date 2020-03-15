@@ -80,26 +80,36 @@ void Inspector::onEntitySelected(shape*s)
 
 void Inspector::onPosXChanged(double val){
         emit AttributeChanged(AttribType::POSITIONX,val);
+        emit ActionDone();
 
 };
 void Inspector::onPosYChanged(double val){
         emit AttributeChanged(AttribType::POSITIONY,val);
+        emit ActionDone();
+
 }
 void Inspector::onScaleXChanged(double val){
         emit AttributeChanged(AttribType::W,val);
         emit AttributeChanged(AttribType::RX,val);
+        emit ActionDone();
+
 }
 void Inspector::onScaleYChanged(double val){
         emit AttributeChanged(AttribType::H,val);
         emit AttributeChanged(AttribType::RY,val);
+        emit ActionDone();
+
 }
 
 void Inspector::onChangeShape(int index){
         emit AttributeChanged(AttribType::SHAPE_TYPE,index);
+        emit ActionDone();
 }
 
 void Inspector::onFillPatternChanged(int index){
         emit AttributeChanged(AttribType::BRUSHSTYLE,index);
+        emit ActionDone();
+
 }
 
 void Inspector::onFillColorButtonPressed(){
@@ -109,9 +119,13 @@ void Inspector::onFillColorButtonPressed(){
     emit AttributeChanged(AttribType::COLORFILLG,c.green());
     emit AttributeChanged(AttribType::COLORFILLB,c.blue());
 
+    emit ActionDone();
+
+
 }
 void Inspector::onBorderPatternChanged(int index){
         emit AttributeChanged(AttribType::PENSTYLE,index);
+        emit ActionDone();
 }
 
 void Inspector::onBorderColorButtonPressed(){
@@ -121,10 +135,15 @@ void Inspector::onBorderColorButtonPressed(){
     emit AttributeChanged(AttribType::COLORBORDERG,c.green());
     emit AttributeChanged(AttribType::COLORBORDERB,c.blue());
 
+    emit ActionDone();
+
+
 }
 
 void Inspector::onBorderWidthChanged(double val){
         emit AttributeChanged(AttribType::BORDERTHICKNESS,val);
+        emit ActionDone();
+
 }
 
 

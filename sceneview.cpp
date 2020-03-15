@@ -123,6 +123,64 @@ void SceneView::onSceneChange()
 
 }
 
+void SceneView::onNewName(int index, QString name)
+{
+    entities[index]->name = name;
+}
+
+void SceneView::AddActionToStack(AttribType type, float num)
+{
+    modification m;
+    m.mod=selected;
+    m.num=num;
+    m.type=type;
+
+    actions.push(m);
+}
+
+void SceneView::onUndoButton()
+{
+    shape* curr_sel = selected;
+    modification last = actions.pop();
+    selected = last.mod;
+    onAttributeChanged(last.type,last.num);
+    //emit EntitySelected(selected);
+
+    selected=curr_sel;
+
+    undoneActions.push(actions.pop());//takes out the last action put in, which was the one of undoing
+}
+
+void SceneView::onRedoButton()
+{
+    if(undoneActions.size()>0)
+    {
+        shape* curr_sel = selected;
+        modification last = undoneActions.pop();
+        selected = last.mod;
+        onAttributeChanged(last.type,last.num);
+        //emit EntitySelected(selected);
+
+        selected=curr_sel;
+
+        //actions.pop();//same as before, lets make sure we don't save unnecessary stuff
+    }
+}
+
+void SceneView::onActionDone()
+{
+    undoneActions.clear();
+}
+
+void SceneView::ClearScene()
+{
+    for(int i=0;i<entities.size();++i)
+    {
+        delete entities[i];
+    }
+    entities.clear();
+}
+
 void SceneView::onAttributeChanged(AttribType aty, float num)
 {
     if(selected == nullptr)
@@ -131,21 +189,23 @@ void SceneView::onAttributeChanged(AttribType aty, float num)
     switch (aty) {
     case SHAPE_TYPE:
         {
-        switch ((int)num) {
-        case 0:
-            {
-            if(selected->type != CIRCLE)
-                selected = RectToCirc((rectangle*)selected);
+            AddActionToStack(aty,selected->type);
+            switch ((int)num) {
+            case 0:
+                {
+                if(selected->type != CIRCLE)
+                    selected = RectToCirc((rectangle*)selected);
+                }
+                break;
+            case 1:
+                {
+                if(selected->type != RECTANGLE)
+                    selected = CircToRect((circle*)selected);
+                }
+                break;
+            default:
+                break;
             }
-            break;
-        case 1:
-            {
-            if(selected->type != RECTANGLE)
-                selected = CircToRect((circle*)selected);            }
-            break;
-        default:
-            break;
-        }
         }
         break;
     case POSITIONX:
@@ -153,12 +213,14 @@ void SceneView::onAttributeChanged(AttribType aty, float num)
             switch (selected->type) {
             case CIRCLE:
                 {
+                AddActionToStack(aty,((circle*)selected)->x);
                 //((circle*)selected)->x = num;
                 ((circle*)selected)->SetCircle(num,((circle*)selected)->y,((circle*)selected)->rx,((circle*)selected)->ry);
                 }
                 break;
             case RECTANGLE:
                 {
+                AddActionToStack(aty,((rectangle*)selected)->x);
                 //((rectangle*)selected)->x = num;
                 ((rectangle*)selected)->SetRectangle(num,((rectangle*)selected)->y,((rectangle*)selected)->w,((rectangle*)selected)->h);
                 }
@@ -173,12 +235,14 @@ void SceneView::onAttributeChanged(AttribType aty, float num)
         switch (selected->type) {
         case CIRCLE:
             {
+            AddActionToStack(aty,((circle*)selected)->y);
             //((circle*)selected)->y = num;
             ((circle*)selected)->SetCircle(((circle*)selected)->x,num,((circle*)selected)->rx,((circle*)selected)->ry);
             }
             break;
         case RECTANGLE:
             {
+            AddActionToStack(aty,((rectangle*)selected)->y);
             //((rectangle*)selected)->y = num;
             ((rectangle*)selected)->SetRectangle(((rectangle*)selected)->x,num,((rectangle*)selected)->w,((rectangle*)selected)->h);
             }
@@ -190,49 +254,65 @@ void SceneView::onAttributeChanged(AttribType aty, float num)
         break;
     case BRUSHSTYLE:
         {
+            AddActionToStack(aty,selected->bstyle);
             selected->bstyle = GetBrushStyle(num);
         }
         break;
     case PENSTYLE:
         {
+            AddActionToStack(aty,selected->pstyle);
             selected->pstyle = GetPenStyle(num);
         }
         break;
     case BORDERTHICKNESS:
         {
+            AddActionToStack(aty,selected->borderThickness);
             selected->borderThickness = num;
         }
         break;
     case W:
         {
         if(selected->type == RECTANGLE)
+        {
+            AddActionToStack(aty,((rectangle*)selected)->w);
             //((rectangle*)selected)->w = num;
             ((rectangle*)selected)->SetRectangle(((rectangle*)selected)->x,((rectangle*)selected)->y,num,((rectangle*)selected)->h);
+        }
 
         }
         break;
     case H:
         {
         if(selected->type == RECTANGLE)
+        {
+            AddActionToStack(aty,((rectangle*)selected)->h);
             //((rectangle*)selected)->h = num;
             ((rectangle*)selected)->SetRectangle(((rectangle*)selected)->x,((rectangle*)selected)->y,((rectangle*)selected)->w,num);
+        }
 
         }
         break;
     case RX:
         {
         if(selected->type == CIRCLE)
+            {
+            AddActionToStack(aty,((circle*)selected)->rx);
             ((circle*)selected)->rx = num;
+            }
         }
         break;
     case RY:
         {
         if(selected->type == CIRCLE)
+            {
+            AddActionToStack(aty,((circle*)selected)->ry);
             ((circle*)selected)->ry = num;
+            }
         }
         break;
     case COLORFILLR:
         {
+        AddActionToStack(aty,selected->colorFill.red());
         QColor c = selected->colorFill;
         c.setRed(num);
         selected->SetColorFill(c);
@@ -240,6 +320,7 @@ void SceneView::onAttributeChanged(AttribType aty, float num)
         break;
     case COLORFILLG:
         {
+        AddActionToStack(aty,selected->colorFill.green());
         QColor c = selected->colorFill;
         c.setGreen(num);
         selected->SetColorFill(c);
@@ -247,6 +328,7 @@ void SceneView::onAttributeChanged(AttribType aty, float num)
         break;
     case COLORFILLB:
         {
+        AddActionToStack(aty,selected->colorFill.blue());
         QColor c = selected->colorFill;
         c.setBlue(num);
         selected->SetColorFill(c);
@@ -254,21 +336,24 @@ void SceneView::onAttributeChanged(AttribType aty, float num)
         break;
     case COLORBORDERR:
         {
-        QColor c = selected->colorFill;
+        AddActionToStack(aty,selected->colorBorder.red());
+        QColor c = selected->colorBorder;
         c.setRed(num);
         selected->SetColorBorder(c);
         }
         break;
     case COLORBORDERG:
         {
-        QColor c = selected->colorFill;
+        AddActionToStack(aty,selected->colorBorder.green());
+        QColor c = selected->colorBorder;
         c.setGreen(num);
         selected->SetColorBorder(c);
         }
         break;
     case COLORBORDERB:
         {
-        QColor c = selected->colorFill;
+        AddActionToStack(aty,selected->colorBorder.blue());
+        QColor c = selected->colorBorder;
         c.setBlue(num);
         selected->SetColorBorder(c);
         }

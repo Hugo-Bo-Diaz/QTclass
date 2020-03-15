@@ -3,6 +3,7 @@
 
 #include <QRectF>
 #include <QColor>
+#include <QString>
 
 enum shapetype
 {
@@ -34,6 +35,9 @@ enum AttribType
 class shape
 {
 public:
+
+    QString name;
+
     shapetype type;
     QColor colorFill = QColor::fromRgb(255,255,255);
     QColor colorBorder = QColor::fromRgb(0,0,0);

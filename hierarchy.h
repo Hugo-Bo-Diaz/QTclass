@@ -27,6 +27,7 @@ signals:
     void EntityDownButtonPressed();
 
     void SceneChange();
+    void NameChanged(int index, QString string);
 
 public slots:
 
