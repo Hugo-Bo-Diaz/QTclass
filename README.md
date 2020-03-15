@@ -2,7 +2,7 @@
 ## Authors:
 -Hugo Bó Díaz
 
--Sergi Parra: Last time I saw him was on monday, we talked briefly about having to do this practice and that was it... 
+-: Last time I saw him was on monday, we talked briefly about having to do this practice and that was it... 
 due to his record I decided that it was better to work on my own until he decided to contact me, 
 then we would've worked together. As of 21:00pm of the delivery date I have still to recieve a message from him.
 
