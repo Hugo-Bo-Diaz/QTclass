@@ -36,8 +36,28 @@ MainWindow::MainWindow(QWidget *parent) :
     uiMainWindow->HierarchyDock->setWidget(hierarchy);
 
 
-    connect(hierarchy,SIGNAL(entitySelected(int)),inspector, SLOT(onEntitySelected(int)));
+    //HIERARCHY -> SCENE
+    connect(hierarchy,SIGNAL(entitySelected(int)),sceneview, SLOT(EntitySelectedSlot(int)));
+    connect(hierarchy,SIGNAL(AddEntityButtonPressed()),sceneview,SLOT(AddEntity()));
+    connect(hierarchy,SIGNAL(RemoveEntityButtonPressed()),sceneview,SLOT(RemoveEntity()));
+    connect(hierarchy,SIGNAL(EntityUpButtonPressed()),sceneview,SLOT(MoveEntityUp()));
+    connect(hierarchy,SIGNAL(EntityDownButtonPressed()),sceneview,SLOT(MoveEntityDown()));
 
+    connect(hierarchy,SIGNAL(SceneChange()),sceneview,SLOT(onSceneChange()));
+
+    //SCENE -> HIERARCHY
+    connect(sceneview,SIGNAL(EntityAdded()),hierarchy,SLOT(AddedEntityList()));
+    connect(sceneview,SIGNAL(EntityRemoved(int)),hierarchy,SLOT(RemovedEntityList(int)));
+    connect(sceneview,SIGNAL(EntityMovedUp(int)),hierarchy,SLOT(EntityMovedUpList(int)));
+    connect(sceneview,SIGNAL(EntityMovedDown(int)),hierarchy,SLOT(EntityMovedDownList(int)));
+
+    //SCENE -> INSPECTOR
+    connect(sceneview, SIGNAL(EntitySelected(shape*)),inspector,SLOT(onEntitySelected(shape*)));
+
+    //INSPECTOR ->SCENE
+    connect(inspector,SIGNAL(AttributeChanged(AttribType,float)),sceneview,SLOT( onAttributeChanged(AttribType,float)));
+
+    connect(inspector,SIGNAL(SceneChange()),sceneview,SLOT(onSceneChange()));
 
 
 }

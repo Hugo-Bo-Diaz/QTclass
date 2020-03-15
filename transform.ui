@@ -15,10 +15,18 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="2" column="1">
-    <widget class="QDoubleSpinBox" name="RotXSpinBox"/>
+    <widget class="QDoubleSpinBox" name="RotXSpinBox">
+     <property name="maximum">
+      <double>9999.989999999999782</double>
+     </property>
+    </widget>
    </item>
    <item row="1" column="2">
-    <widget class="QDoubleSpinBox" name="PosYSpinBox"/>
+    <widget class="QDoubleSpinBox" name="PosYSpinBox">
+     <property name="maximum">
+      <double>9999.989999999999782</double>
+     </property>
+    </widget>
    </item>
    <item row="2" column="0">
     <widget class="QLabel" name="rotationLabel">
@@ -41,10 +49,18 @@
     </spacer>
    </item>
    <item row="1" column="1">
-    <widget class="QDoubleSpinBox" name="PosXSpinBox"/>
+    <widget class="QDoubleSpinBox" name="PosXSpinBox">
+     <property name="maximum">
+      <double>9999.989999999999782</double>
+     </property>
+    </widget>
    </item>
    <item row="2" column="2">
-    <widget class="QDoubleSpinBox" name="RotYSpinBox"/>
+    <widget class="QDoubleSpinBox" name="RotYSpinBox">
+     <property name="maximum">
+      <double>9999.989999999999782</double>
+     </property>
+    </widget>
    </item>
    <item row="1" column="3">
     <spacer name="horizontalSpacer_4">

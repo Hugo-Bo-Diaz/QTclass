@@ -24,6 +24,20 @@ Inspector::Inspector(QWidget *parent) :
 
     setLayout(layout);
 
+
+    //CONNECT WITH UI
+    connect(uiProperties->FillColor, SIGNAL(clicked()),this, SLOT(onFillColorButtonPressed()));
+    connect(uiProperties->BorderColor, SIGNAL(clicked()),this, SLOT(onBorderColorButtonPressed()));
+    connect(uiTransform->PosXSpinBox, SIGNAL(valueChanged(double)),this, SLOT(onPosXChanged(double)));
+    connect(uiTransform->PosYSpinBox, SIGNAL(valueChanged(double)),this, SLOT(onPosYChanged(double)));
+    connect(uiTransform->RotXSpinBox, SIGNAL(valueChanged(double)),this, SLOT(onScaleXChanged(double)));
+    connect(uiTransform->RotYSpinBox, SIGNAL(valueChanged(double)),this, SLOT(onScaleYChanged(double)));
+
+    connect(uiProperties->ShapeShift, SIGNAL(currentIndexChanged(int)),this, SLOT(onChangeShape(int)));
+    connect(uiProperties->FillPattern, SIGNAL(currentIndexChanged(int)),this, SLOT(onFillPatternChanged(int)));
+    connect(uiProperties->BorderPattern, SIGNAL(currentIndexChanged(int)),this, SLOT(onBorderPatternChanged(int)));
+    connect(uiProperties->BorderWidth, SIGNAL(valueChanged(double)),this, SLOT(onBorderWidthChanged(double)));
+
 }
 
 Inspector::~Inspector()
@@ -33,8 +47,84 @@ Inspector::~Inspector()
 }
 
 
-void Inspector::onEntitySelected(int entityId)
+void Inspector::onEntitySelected(shape*s)
 {
+    //shape* s = win->sceneview->entities[entityId];
 
-    win->sceneview->entities[entityId]->SetColorBorder(QColor::fromRgb(255,255,255));
+    switch (s->type)
+    {
+    case CIRCLE:
+    {
+        circle* c = ((circle*)s);
+        uiTransform->PosXSpinBox->setValue(c->x);
+        uiTransform->PosYSpinBox->setValue(c->y);
+        uiTransform->RotXSpinBox->setValue(c->rx);
+        uiTransform->RotYSpinBox->setValue(c->ry);
+    }
+        break;
+    case RECTANGLE:
+    {
+        rectangle* r = ((rectangle*)s);
+        uiTransform->PosXSpinBox->setValue(r->x);
+        uiTransform->PosYSpinBox->setValue(r->y);
+        uiTransform->RotXSpinBox->setValue(r->w);
+        uiTransform->RotYSpinBox->setValue(r->h);
+    }
+        break;
+    default:
+        break;
+
+    }
+    uiProperties->BorderWidth->setValue(s->borderThickness);
 }
+
+void Inspector::onPosXChanged(double val){
+        emit AttributeChanged(AttribType::POSITIONX,val);
+
+};
+void Inspector::onPosYChanged(double val){
+        emit AttributeChanged(AttribType::POSITIONY,val);
+}
+void Inspector::onScaleXChanged(double val){
+        emit AttributeChanged(AttribType::W,val);
+        emit AttributeChanged(AttribType::RX,val);
+}
+void Inspector::onScaleYChanged(double val){
+        emit AttributeChanged(AttribType::H,val);
+        emit AttributeChanged(AttribType::RY,val);
+}
+
+void Inspector::onChangeShape(int index){
+        emit AttributeChanged(AttribType::SHAPE_TYPE,index);
+}
+
+void Inspector::onFillPatternChanged(int index){
+        emit AttributeChanged(AttribType::BRUSHSTYLE,index);
+}
+
+void Inspector::onFillColorButtonPressed(){
+
+    QColor c = QColorDialog::getColor(Qt::white,this,"Choose color");
+    emit AttributeChanged(AttribType::COLORFILLR,c.red());
+    emit AttributeChanged(AttribType::COLORFILLG,c.green());
+    emit AttributeChanged(AttribType::COLORFILLB,c.blue());
+
+}
+void Inspector::onBorderPatternChanged(int index){
+        emit AttributeChanged(AttribType::PENSTYLE,index);
+}
+
+void Inspector::onBorderColorButtonPressed(){
+
+    QColor c = QColorDialog::getColor(Qt::white,this,"Choose color");
+    emit AttributeChanged(AttribType::COLORBORDERR,c.red());
+    emit AttributeChanged(AttribType::COLORBORDERG,c.green());
+    emit AttributeChanged(AttribType::COLORBORDERB,c.blue());
+
+}
+
+void Inspector::onBorderWidthChanged(double val){
+        emit AttributeChanged(AttribType::BORDERTHICKNESS,val);
+}
+
+

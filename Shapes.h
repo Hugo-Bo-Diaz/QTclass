@@ -11,10 +11,29 @@ enum shapetype
     RECTANGLE
 };
 
+enum AttribType
+{
+    SHAPE_TYPE,
+    POSITIONX,
+    POSITIONY,
+    COLORFILLR,
+    COLORFILLG,
+    COLORFILLB,
+    COLORBORDERR,
+    COLORBORDERG,
+    COLORBORDERB,
+    BRUSHSTYLE,
+    PENSTYLE,
+    BORDERTHICKNESS,
+    RX,
+    RY,
+    W,
+    H,
+};
+
 class shape
 {
 public:
-
     shapetype type;
     QColor colorFill = QColor::fromRgb(255,255,255);
     QColor colorBorder = QColor::fromRgb(0,0,0);
@@ -83,5 +102,7 @@ public:
         Qcenter = new QPointF(x,y);
     };
 };
+
+
 
 #endif // SHAPES_H

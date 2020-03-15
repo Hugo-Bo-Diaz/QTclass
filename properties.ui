@@ -14,8 +14,38 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="1">
-    <widget class="QComboBox" name="FillPattern">
+   <item row="1" column="0">
+    <widget class="QLabel" name="LabelFP">
+     <property name="text">
+      <string>Fill Pattern</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="1">
+    <widget class="QPushButton" name="FillColor">
+     <property name="text">
+      <string>CHANGE COLOR</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QDoubleSpinBox" name="BorderWidth"/>
+   </item>
+   <item row="4" column="1">
+    <widget class="QComboBox" name="BorderPattern">
      <item>
       <property name="text">
        <string>Regular</string>
@@ -23,22 +53,29 @@
      </item>
      <item>
       <property name="text">
-       <string>Pattern</string>
+       <string>Dash line</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Dotted line</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Dash dot line</string>
       </property>
      </item>
     </widget>
    </item>
    <item row="5" column="1">
-    <widget class="QDoubleSpinBox" name="BorderWidth"/>
-   </item>
-   <item row="1" column="1">
-    <widget class="QPushButton" name="FillColor">
+    <widget class="QPushButton" name="BorderColor">
      <property name="text">
       <string>CHANGE COLOR</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="0">
+   <item row="4" column="0">
     <widget class="QLabel" name="LabelBP">
      <property name="text">
       <string>Border Pattern</string>
@@ -46,20 +83,13 @@
     </widget>
    </item>
    <item row="5" column="0">
-    <widget class="QLabel" name="LabelBW">
-     <property name="text">
-      <string>Border Width</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="0">
     <widget class="QLabel" name="LabelBC">
      <property name="text">
       <string>Border Color</string>
      </property>
     </widget>
    </item>
-   <item row="5" column="2">
+   <item row="6" column="2">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -72,29 +102,15 @@
      </property>
     </spacer>
    </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="LabelFP">
-     <property name="text">
-      <string>Fill Pattern</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1">
-    <widget class="QPushButton" name="BorderColor">
-     <property name="text">
-      <string>CHANGE COLOR</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
+   <item row="2" column="0">
     <widget class="QLabel" name="LabelFC">
      <property name="text">
       <string>Fill Color</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="1">
-    <widget class="QComboBox" name="BorderPattern">
+   <item row="1" column="1">
+    <widget class="QComboBox" name="FillPattern">
      <item>
       <property name="text">
        <string>Regular</string>
@@ -102,23 +118,48 @@
      </item>
      <item>
       <property name="text">
-       <string>Dotted line</string>
+       <string>Dots</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Lines</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Diagonal lines</string>
       </property>
      </item>
     </widget>
    </item>
-   <item row="6" column="1">
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
+   <item row="6" column="0">
+    <widget class="QLabel" name="LabelBW">
+     <property name="text">
+      <string>Border Width</string>
      </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QComboBox" name="ShapeShift">
+     <item>
+      <property name="text">
+       <string>Circle</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Rectangle</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Shape</string>
      </property>
-    </spacer>
+    </widget>
    </item>
   </layout>
  </widget>

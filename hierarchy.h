@@ -20,13 +20,32 @@ signals:
 
     void entitySelected(int entityId);
 
+    void AddEntityButtonPressed();
+    void RemoveEntityButtonPressed();
+
+    void EntityUpButtonPressed();
+    void EntityDownButtonPressed();
+
+    void SceneChange();
+
 public slots:
 
-    void onAddEntity();
-    void onRemoveEntity();
+    //FROM UI
+    void onAddEntityButton();
+    void onRemoveEntityButton();
+
     void onEntitySelected(int row);
     void onEntityChangeName(QListWidgetItem *item);
-    void test(QListWidgetItem* item);
+
+    void onEntityUpButton();
+    void onEntityDownButton();
+
+    //FROM OTHER MODULES
+    void AddedEntityList();
+    void RemovedEntityList(int);
+    void EntityMovedUpList(int);
+    void EntityMovedDownList(int);
+
 
 private:
     Ui::Hierarchy *ui;
